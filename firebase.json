@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "kouryuu_site/dist/kouryuu_site/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
