@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Área do Aluno</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                formControlName="email"
+                placeholder="seu@email.com">
+              <div class="text-danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório</small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido</small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Senha</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                formControlName="password"
+                placeholder="Sua senha">
+              <div class="text-danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                <small *ngIf="loginForm.get('password')?.errors?.['required']">Senha é obrigatória</small>
+                <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Senha deve ter no mínimo 6 caracteres</small>
+              </div>
+            </div>
+            <div class="d-grid">
+              <button 
+                type="submit" 
+                class="btn btn-primary"
+                [disabled]="loginForm.invalid || isLoading">
+                {{ isLoading ? 'Entrando...' : 'Entrar' }}
+              </button>
+            </div>
+            <div class="alert alert-danger mt-3" *ngIf="error">
+              {{ error }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
