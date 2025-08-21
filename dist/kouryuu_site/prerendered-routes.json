@@ -1,0 +1,8 @@
+{
+  "routes": {
+    "/Taiko_site": {},
+    "/Taiko_site/aluno": {},
+    "/Taiko_site/home": {},
+    "/Taiko_site/login": {}
+  }
+}
