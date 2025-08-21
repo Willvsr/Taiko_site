@@ -58,6 +58,7 @@
                   "maximumError": "16kB"
                 }
               ],
+              "baseHref": "/Taiko_site/",
               "outputHashing": "all"
             },
             "development": {
