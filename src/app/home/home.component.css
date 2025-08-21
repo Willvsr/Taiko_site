@@ -466,78 +466,81 @@ body {
     }
     
     .main-section {
-        padding: 180px 80px;
+        padding: 100px 40px;
     }
     
     .content-row {
-        max-width: 1400px;
-        gap: 80px;
+        max-width: 1200px;
+        gap: 40px;
+        margin: 0 auto 100px auto;
     }
     
     .text-content {
-        max-width: 550px;
+        max-width: 45%;
+        position: relative;
+        z-index: 2;
     }
     
     .circle-image {
-        width: 400px;
-        height: 400px;
+        width: 350px;
+        height: 350px;
     }
+
     .content-row:first-child {
-        justify-content: flex-start;
-        padding-left: 60px;
+        justify-content: flex-end;
+        padding-right: 5%;
     }
     
     .content-row:first-child .text-content {
-        margin-left: 20%;
+        margin-left: 0;
         text-align: left;
     }
     
     .content-row:first-child .image-content {
-        left: -30%;
+        left: 5%;
         top: 50%;
         transform: translateY(-50%);
     }
     
     .content-row:last-child {
-        justify-content: flex-end;
-        padding-right: 60px;
+        justify-content: flex-start;
+        padding-left: 5%;
     }
     
     .content-row:last-child .text-content {
-        margin-right: -20%;
+        margin-right: 0;
         text-align: right;
-
     }
     
     .content-row:last-child .text-content h2 {
         text-align: right;
-        min-width: 100px;
-        max-width: 300px;
     }
     
     .content-row:last-child .text-content p {
-        text-align: left;
-        min-width: 100px;
-        max-width: 300px;
+        text-align: right;
     }
     
     .content-row:last-child .image-content {
-        right: -30%;
-        top: 70%;
+        right: 5%;
+        top: 50%;
         transform: translateY(-50%);
     }
     
     .events {
         padding: 60px 40px;
+        margin-top: 40px;
     }
     
     .events-grid {
-        max-width: 1000px;
-        grid-template-columns: repeat(2, 1fr);
+        max-width: 90%;
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
     }
     
     .footer {
         padding: 40px;
+        margin-top: 40px;
     }
 }
 
