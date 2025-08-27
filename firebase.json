@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/kouryuu_site/browser",
+    "public": "dist/kouryuu_site",
     "ignore": [
       "firebase.json",
       "**/.*",
