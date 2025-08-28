@@ -1,3 +1,185 @@
-<!DOCTYPE html>
-<meta http-equiv="refresh" content="0; url=src/app/app.html">
-<link rel="canonical" href="src/app/app.html">
+<header class="header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo-container">
+        <img 
+            src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Logo.png" 
+            alt="Kouryuu Daiko" 
+            class="logo"
+        />
+        </div>
+
+        <!-- Menu Desktop -->
+        <nav class="desktop-menu">
+        <a 
+            *ngFor="let item of menuItems; let i = index"
+            [href]="item.href"
+            [class.active]="item.active"
+            class="menu-link"
+            (click)="setActiveItem(i)"
+        >
+            {{ item.label }}
+        </a>
+        </nav>
+
+        <!-- Login Desktop -->
+        <div class="desktop-login">
+        <a href="#login" class="login-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+        </div>
+
+        <!-- Menu Icon Mobile -->
+        <button 
+        class="menu-icon"
+        [class.open]="isMenuOpen"
+        (click)="toggleMenu()"
+        aria-label="Menu"
+        >
+        <span></span>
+        <span></span>
+        <span></span>
+        </button>
+    </div>
+    </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div 
+        class="mobile-overlay"
+        [class.visible]="isMenuOpen"
+        (click)="closeMenu()"
+        ></div>
+
+        <!-- Mobile Menu -->
+        <div 
+        class="mobile-menu"
+        [class.open]="isMenuOpen"
+        >
+        <div class="mobile-menu-content">
+            <!-- Close Button -->
+            <div class="close-btn-container">
+            <button 
+                class="close-btn"
+                (click)="closeMenu()"
+                aria-label="Fechar menu"
+            >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            </div>
+
+            <!-- Menu Items -->
+            <nav class="mobile-nav">
+            <ul class="mobile-menu-list">
+                <li *ngFor="let item of menuItems; let i = index">
+                <a 
+                    [href]="item.href"
+                    [class.active]="item.active"
+                    class="mobile-menu-link"
+                    (click)="setActiveItem(i)"
+                >
+                    {{ item.label }}
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            <!-- Login e Instagram Mobile -->
+            <div class="mobile-footer">
+            <a href="#login" class="mobile-footer-link" (click)="closeMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Login</span>
+            </a>
+            <a 
+                href="https://www.instagram.com/kouryuu.daiko"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mobile-footer-link"
+                (click)="closeMenu()"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+                <span>Instagram</span>
+            </a>
+            </div>
+        </div>
+    </div>
+
+        <main class="main-section">
+            <div class="content-row">
+              <div class="image-content">
+                <div class="circle-image crop-right">
+                  <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg" alt="Taiko com diversidade">
+                </div>
+                </div>
+                <div class="text-content">
+                    <h2>Taiko com diversidade</h2>
+                    <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                </div>
+            </div>
+            <div class="content-row reverse">
+                <div class="image-content">
+                    <div class="circle-image crop-left">
+                        <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg" alt="Levamos a tradição e cultura">
+                    </div>
+                </div>
+                <div class="text-content">
+                    <h2>Levamos a tradição e cultura</h2>
+                    <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                </div>
+            </div>
+        </main>
+        <section class="events">
+            <h3>Próximas apresentações:</h3>
+            <div class="events-grid">
+                <div class="event-card large">
+                    <div class="event-image">
+                        <div class="event-placeholder"></div>
+                    </div>
+                    <div class="event-info">
+                        <h4>Festival de Música Tradicional</h4>
+                        <div class="event-date">15/09/2025</div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-placeholder"></div>
+                    </div>
+                    <div class="event-info">
+                        <h4>Salão do livro</h4>
+                        <div class="event-date">6 Bela vista  21/08/2025</div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        <div class="event-placeholder"></div>
+                    </div>
+                    <div class="event-info">
+                        <h4>Workshop de Taiko</h4>
+                        <div class="event-date">28/08/2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Kouryuu Daiko. Todos os direitos reservados.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/kouryuu.daiko" target="_blank"></a>
+                <a href="https://www.instagram.com/kouryuu.daiko" target="_blank"></a>
+                <a href="https://www.youtube.com/kouryuu.daiko" target="_blank"></a>
+            </div>
+        </footer>

@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
 <header class="header">
     <div class="header-container">
         <!-- Logo -->
@@ -140,37 +141,68 @@
                 </div>
             </div>
         </main>
-        <section class="events">
-            <h3>Próximas apresentações:</h3>
-            <div class="events-grid">
-                <div class="event-card large">
-                    <div class="event-image">
-                        <div class="event-placeholder"></div>
+        <section class="featured-events">
+            <h3>Próximas Apresentações:</h3>
+            
+            <!-- Carrossel apenas com imagens -->
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" #carouselTrack>
+                        <div class="carousel-slide" *ngFor="let event of featuredEvents; let i = index" 
+                            [class.active]="i === currentSlide">
+                            <div class="slide-image" [style.background-image]="'url(' + event.image + ')'"></div>
+                        </div>
                     </div>
-                    <div class="event-info">
-                        <h4>Festival de Música Tradicional</h4>
-                        <div class="event-date">15/09/2025</div>
+                    
+                    <!-- Controles do Carousel -->
+                    <button class="carousel-btn prev" (click)="prevSlide()" aria-label="Slide anterior">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <button class="carousel-btn next" (click)="nextSlide()" aria-label="Próximo slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <!-- Indicadores -->
+                    <div class="carousel-indicators">
+                        <button *ngFor="let event of featuredEvents; let i = index"
+                                [class.active]="i === currentSlide"
+                                (click)="goToSlide(i)"
+                                aria-label="Ir para slide {{ i + 1 }}">
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div class="event-card">
-                    <div class="event-image">
-                        <div class="event-placeholder"></div>
+            <!-- Informações abaixo do carrossel -->
+            <div class="event-info-container">
+                <div class="event-info" *ngIf="featuredEvents[currentSlide]">
+                    <h4>{{ featuredEvents[currentSlide].title }}</h4>
+                    <div class="event-details">
+                        <span class="location">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            {{ featuredEvents[currentSlide].location }}
+                        </span>
+                        <span class="date">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            {{ featuredEvents[currentSlide].date }}
+                        </span>
                     </div>
-                    <div class="event-info">
-                        <h4>Salão do livro</h4>
-                        <div class="event-date">6 Bela vista  21/08/2025</div>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <div class="event-image">
-                        <div class="event-placeholder"></div>
-                    </div>
-                    <div class="event-info">
-                        <h4>Workshop de Taiko</h4>
-                        <div class="event-date">28/08/2025</div>
-                    </div>
+                    <a [href]="featuredEvents[currentSlide].link" class="event-btn" target="_blank">
+                        Ver Evento
+                    </a>
                 </div>
             </div>
         </section>

@@ -39,4 +39,86 @@ export class App {
     // Fecha o menu mobile
     this.closeMenu();
   }
+
+  // Propriedades do carousel
+  currentSlide = 0;
+  featuredEvents = [
+    {
+      title: 'Apresentação e oficinas de Taiko no Salão do Livro',
+      location: 'Jardim externo do Centro Cultural Usiminas - Shopping do Vale do Aço - Ipatinga - MG',
+      date: 'Domingo, 14 de Set às 10 às 12h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento1'
+    },
+    {
+      title: 'Apresentação e oficinas de taiko',
+      location: 'praça de alimentação ( em frente ao restaurante Massume) - Shopping do Vale do Aço - Ipatinga - MG',
+      date: 'Sábado, 4 de Out às 14 às 15h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento2'
+    },
+    {
+      title: 'Mostra de Taiko - Treino aberto e oficinas de taiko',
+      location: 'Galpão 1 - Parque Ipanema - Ipatinga - MG',
+      date: 'Sábado, 18 de Out às 13 às 17h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento3'
+    }
+  ];
+
+  private carouselInterval: any;
+
+  ngOnInit() {
+    // Iniciar auto-play do carousel
+    this.startCarouselAutoplay();
+      if (typeof window !== 'undefined') {
+    this.preloadImages();
+  }
+}
+    private preloadImages() {
+      if (typeof Image === 'undefined') return;
+  
+  this.featuredEvents.forEach(event => {
+    const img = new Image();
+    img.src = event.image;
+  });
+}
+
+  ngOnDestroy() {
+    // Limpar interval quando o componente for destruído
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
+  }
+
+  // Métodos do carousel
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.featuredEvents.length;
+    this.resetAutoplay();
+  }
+
+  prevSlide() {
+    this.currentSlide = this.currentSlide === 0 
+      ? this.featuredEvents.length - 1 
+      : this.currentSlide - 1;
+    this.resetAutoplay();
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+    this.resetAutoplay();
+  }
+
+  private startCarouselAutoplay() {
+    this.carouselInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // Muda slide a cada 5 segundos
+  }
+
+  private resetAutoplay() {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+      this.startCarouselAutoplay();
+    }
+  }
 }
