@@ -1,0 +1,124 @@
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './app.html',
+  styleUrl: './app.scss'
+})
+export class App {
+  protected readonly title = signal('kouryuu_site');
+  isMenuOpen = false;
+  menuItems = [
+    { label: 'Sobre nós', href: '#sobre', active: true },
+    { label: 'Projetos', href: '#projetos', active: false },
+    { label: 'Contato', href: '#contato', active: false },
+    { label: 'Calendário', href: '#calendario', active: false },
+    { label: 'Como participar', href: '#participar', active: false },
+    { label: 'Galeria', href: '#galeria', active: false },
+    { label: 'Apoie', href: '#apoie', active: false }
+  ];
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  setActiveItem(index: number): void {
+    // Reset todos os itens
+    this.menuItems.forEach(item => item.active = false);
+    // Ativa o item clicado
+    this.menuItems[index].active = true;
+    // Fecha o menu mobile
+    this.closeMenu();
+  }
+
+  // Propriedades do carousel
+  currentSlide = 0;
+  featuredEvents = [
+    {
+      title: 'Apresentação e oficinas de Taiko no Salão do Livro',
+      location: 'Jardim externo do Centro Cultural Usiminas - Shopping do Vale do Aço - Ipatinga - MG',
+      date: 'Domingo, 14 de Set às 10 às 12h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento1'
+    },
+    {
+      title: 'Apresentação e oficinas de taiko',
+      location: 'praça de alimentação ( em frente ao restaurante Massume) - Shopping do Vale do Aço - Ipatinga - MG',
+      date: 'Sábado, 4 de Out às 14 às 15h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento2'
+    },
+    {
+      title: 'Mostra de Taiko - Treino aberto e oficinas de taiko',
+      location: 'Galpão 1 - Parque Ipanema - Ipatinga - MG',
+      date: 'Sábado, 18 de Out às 13 às 17h',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
+      link: '#evento3'
+    }
+  ];
+
+  private carouselInterval: any;
+
+  ngOnInit() {
+    // Iniciar auto-play do carousel
+    this.startCarouselAutoplay();
+      if (typeof window !== 'undefined') {
+    this.preloadImages();
+  }
+}
+    private preloadImages() {
+      if (typeof Image === 'undefined') return;
+  
+  this.featuredEvents.forEach(event => {
+    const img = new Image();
+    img.src = event.image;
+  });
+}
+
+  ngOnDestroy() {
+    // Limpar interval quando o componente for destruído
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+    }
+  }
+
+  // Métodos do carousel
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.featuredEvents.length;
+    this.resetAutoplay();
+  }
+
+  prevSlide() {
+    this.currentSlide = this.currentSlide === 0 
+      ? this.featuredEvents.length - 1 
+      : this.currentSlide - 1;
+    this.resetAutoplay();
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+    this.resetAutoplay();
+  }
+
+  private startCarouselAutoplay() {
+    this.carouselInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // Muda slide a cada 5 segundos
+  }
+
+  private resetAutoplay() {
+    if (this.carouselInterval) {
+      clearInterval(this.carouselInterval);
+      this.startCarouselAutoplay();
+    }
+  }
+}

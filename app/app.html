@@ -1,0 +1,217 @@
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+<header class="header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo-container">
+        <img 
+            src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Logo.png" 
+            alt="Kouryuu Daiko" 
+            class="logo"
+        />
+        </div>
+
+        <!-- Menu Desktop -->
+        <nav class="desktop-menu">
+        <a 
+            *ngFor="let item of menuItems; let i = index"
+            [href]="item.href"
+            [class.active]="item.active"
+            class="menu-link"
+            (click)="setActiveItem(i)"
+        >
+            {{ item.label }}
+        </a>
+        </nav>
+
+        <!-- Login Desktop -->
+        <div class="desktop-login">
+        <a href="#login" class="login-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+        </div>
+
+        <!-- Menu Icon Mobile -->
+        <button 
+        class="menu-icon"
+        [class.open]="isMenuOpen"
+        (click)="toggleMenu()"
+        aria-label="Menu"
+        >
+        <span></span>
+        <span></span>
+        <span></span>
+        </button>
+    </div>
+    </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div 
+        class="mobile-overlay"
+        [class.visible]="isMenuOpen"
+        (click)="closeMenu()"
+        ></div>
+
+        <!-- Mobile Menu -->
+        <div 
+        class="mobile-menu"
+        [class.open]="isMenuOpen"
+        >
+        <div class="mobile-menu-content">
+            <!-- Close Button -->
+            <div class="close-btn-container">
+            <button 
+                class="close-btn"
+                (click)="closeMenu()"
+                aria-label="Fechar menu"
+            >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            </div>
+
+            <!-- Menu Items -->
+            <nav class="mobile-nav">
+            <ul class="mobile-menu-list">
+                <li *ngFor="let item of menuItems; let i = index">
+                <a 
+                    [href]="item.href"
+                    [class.active]="item.active"
+                    class="mobile-menu-link"
+                    (click)="setActiveItem(i)"
+                >
+                    {{ item.label }}
+                </a>
+                </li>
+            </ul>
+            </nav>
+
+            <!-- Login e Instagram Mobile -->
+            <div class="mobile-footer">
+            <a href="#login" class="mobile-footer-link" (click)="closeMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Login</span>
+            </a>
+            <a 
+                href="https://www.instagram.com/kouryuu.daiko"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mobile-footer-link"
+                (click)="closeMenu()"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+                <span>Instagram</span>
+            </a>
+            </div>
+        </div>
+    </div>
+
+        <main class="main-section">
+            <div class="content-row">
+              <div class="image-content">
+                <div class="circle-image crop-right">
+                  <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg" alt="Taiko com diversidade">
+                </div>
+                </div>
+                <div class="text-content">
+                    <h2>Taiko com diversidade</h2>
+                    <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                </div>
+            </div>
+            <div class="content-row reverse">
+                <div class="image-content">
+                    <div class="circle-image crop-left">
+                        <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg" alt="Levamos a tradição e cultura">
+                    </div>
+                </div>
+                <div class="text-content">
+                    <h2>Levamos a tradição e cultura</h2>
+                    <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                </div>
+            </div>
+        </main>
+        <section class="featured-events">
+            <h3>Próximas Apresentações:</h3>
+            
+            <!-- Carrossel apenas com imagens -->
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" #carouselTrack>
+                        <div class="carousel-slide" *ngFor="let event of featuredEvents; let i = index" 
+                            [class.active]="i === currentSlide">
+                            <div class="slide-image" [style.background-image]="'url(' + event.image + ')'"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controles do Carousel -->
+                    <button class="carousel-btn prev" (click)="prevSlide()" aria-label="Slide anterior">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <button class="carousel-btn next" (click)="nextSlide()" aria-label="Próximo slide">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <!-- Indicadores -->
+                    <div class="carousel-indicators">
+                        <button *ngFor="let event of featuredEvents; let i = index"
+                                [class.active]="i === currentSlide"
+                                (click)="goToSlide(i)"
+                                aria-label="Ir para slide {{ i + 1 }}">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações abaixo do carrossel -->
+            <div class="event-info-container">
+                <div class="event-info" *ngIf="featuredEvents[currentSlide]">
+                    <h4>{{ featuredEvents[currentSlide].title }}</h4>
+                    <div class="event-details">
+                        <span class="location">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            {{ featuredEvents[currentSlide].location }}
+                        </span>
+                        <span class="date">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            {{ featuredEvents[currentSlide].date }}
+                        </span>
+                    </div>
+                    <a [href]="featuredEvents[currentSlide].link" class="event-btn" target="_blank">
+                        Ver Evento
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Kouryuu Daiko. Todos os direitos reservados.</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/kouryuu.daiko" target="_blank"></a>
+                <a href="https://www.instagram.com/kouryuu.daiko" target="_blank"></a>
+                <a href="https://www.youtube.com/kouryuu.daiko" target="_blank"></a>
+            </div>
+        </footer>
