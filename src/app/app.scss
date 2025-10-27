@@ -72,25 +72,194 @@ body {
     display: flex;
     padding-left: 20%;
   }
-}
 
-.menu-link {
-  color: $gray-text;
-  text-decoration: none;
-  padding: 8px 12px;
-  font-size: 24px;
-  font-weight: 500;
-  transition: color 0.2s ease;
-  position: relative;
-  font-family: 'Baloo 2', sans-serif;
-
-  &:hover {
-    color: $yellow-hover;
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
   }
 
-  &.active {
-    color: $yellow-primary;
-    font-weight: 600;
+  li {
+    position: relative;
+    
+    &.has-submenu {
+      position: relative;
+      
+      .menu-link {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        
+        .dropdown-arrow {
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      &.menu-open {
+        .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .menu-link {
+    color: $gray-text;
+    text-decoration: none;
+    padding: 8px 12px;
+    font-size: 24px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+    font-family: 'Baloo 2', sans-serif;
+    white-space: nowrap;
+
+    &:hover {
+      color: $yellow-hover;
+    }
+
+    &.active {
+      color: $yellow-primary;
+      font-weight: 600;
+    }
+  }
+}
+  // Submenu Styles
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: $black-menu;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  min-width: 280px;
+  padding: 12px 0;
+  margin-top: 12px;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  // 🔥 RESET COMPLETO - Remove qualquer herança
+  display: block !important;
+  flex-direction: unset !important;
+  flex-wrap: unset !important;
+  align-items: unset !important;
+  justify-content: unset !important;
+  gap: unset !important;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background: $black-menu;
+    transform: rotate(45deg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  // 🔥 Remove estilos de lista do menu principal
+  li {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100% !important;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .submenu-link {
+    display: block !important;
+    padding: 14px 24px;
+    color: $white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-family: 'Baloo 2', sans-serif;
+    white-space: nowrap;
+    width: 100% !important;
+    
+    // 🔥 Remove qualquer herança de flex
+    flex: unset !important;
+
+    &:hover {
+      background: rgba(252, 211, 77, 0.15);
+      color: $yellow-primary;
+      padding-left: 32px;
+    }
+
+    &.active {
+      color: $yellow-primary;
+      background: rgba(252, 211, 77, 0.1);
+    }
+  }
+}
+// Ajuste para o menu principal com submenu
+.has-submenu {
+  .menu-link {
+    position: relative;
+    
+    &:hover {
+      color: $yellow-hover;
+    }
+    
+    &.active {
+      color: $yellow-primary;
+    }
+  }
+}
+
+// Menu Desktop - Ajuste de alinhamento
+.desktop-menu {
+  > ul {
+    display: flex; // Apenas o menu principal é flex
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    
+    // 🔥 IMPORTANTE: Os submenus NÃO herdam flex
+    .submenu {
+      display: block !important; // Força display block
+      
+      li {
+        display: block !important; // Força display block nos itens
+      }
+    }
+  }
+
+  
+  .menu-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    .dropdown-arrow {
+      transition: transform 0.3s ease;
+      opacity: 0.7;
+    }
+    
+    &:hover .dropdown-arrow {
+      opacity: 1;
+    }
+  }
+  
+  .has-submenu.menu-open {
+    .menu-link {
+      color: $yellow-primary;
+      
+      .dropdown-arrow {
+        transform: rotate(180deg);
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -258,42 +427,71 @@ body {
 
 // Mobile Navigation
 .mobile-nav {
-  flex: 1;
-}
-
-.mobile-menu-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  @media (max-width: 375px) {
-    gap: 20px;
+  .mobile-menu-list {
+    li {
+      position: relative;
+      
+      .mobile-menu-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .dropdown-arrow {
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      &.menu-open {
+        .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+        
+        .mobile-submenu {
+          display: block;
+        }
+      }
+    }
   }
 }
 
-.mobile-menu-link {
-  display: block;
-  color: $white;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  transition: color 0.2s ease;
-  font-family: 'Baloo 2', sans-serif;
-
-  @media (max-width: 375px) {
+.mobile-submenu {
+  display: none;
+  padding-left: 0;
+  margin-top: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 8px 0;
+  
+  li {
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .mobile-submenu-link {
+    display: block;
+    padding: 12px 20px;
+    color: $white;
+    text-decoration: none;
     font-size: 16px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    font-family: 'Baloo 2', sans-serif;
+    
+    &:hover {
+      opacity: 1;
+      color: $yellow-primary;
+      background: rgba(252, 211, 77, 0.1);
+      padding-left: 28px;
+    }
   }
+}
 
-  &:hover {
-    color: $yellow-primary;
-  }
-
-  &.active {
-    color: $yellow-primary;
-  }
+.mobile-nav .mobile-menu-list li.menu-open .mobile-submenu {
+  display: block;
 }
 
 // Mobile Footer

@@ -1,22 +1,37 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
 export class App {
   protected readonly title = signal('kouryuu_site');
   isMenuOpen = false;
   menuItems = [
-    { label: 'Sobre nós', href: '#sobre', active: true },
+    { label: 'Home', href: '#home', active: true },
+    { label: 'Sobre nós', href: '#sobre', active: false, isOpen: false,
+      submenu: [
+      { label: 'História', href: '/sobre/historia' },
+      { label: 'Missão e valores', href: '/sobre/valores' },
+      { label: 'O Mascote', href: '/sobre/mascote' },
+      { label: 'Membros', href: '/sobre/membros' },
+      { label: 'Currículo', href: '/sobre/curriculo' },
+    ]
+     },
     { label: 'Projetos', href: '#projetos', active: false },
-    { label: 'Contato', href: '#contato', active: false },
-    { label: 'Calendário', href: '#calendario', active: false },
+    { label: 'Contato', href: '#contato', active: false, isOpen: false,
+      submenu: [
+      { label: 'Solicitar apresentação / oficinas', href: '/contato/oficinas' },
+      { label: 'Dúvidas', href: '/contato/duvidas' },
+      { label: 'Fale conosco', href: '/contato/fale' },
+    ]
+     },
     { label: 'Como participar', href: '#participar', active: false },
+    { label: 'Calendário', href: '#calendario', active: false },
     { label: 'Galeria', href: '#galeria', active: false },
     { label: 'Apoie', href: '#apoie', active: false }
   ];
@@ -38,6 +53,29 @@ export class App {
     this.menuItems[index].active = true;
     // Fecha o menu mobile
     this.closeMenu();
+  }
+toggleSubmenu(item: any, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    
+    // Fecha outros submenus abertos
+    this.menuItems.forEach(menuItem => {
+      if (menuItem !== item && menuItem.isOpen) {
+        menuItem.isOpen = false;
+      }
+    });
+    
+    // Alterna o submenu atual
+    if (item.submenu) {
+      item.isOpen = !item.isOpen;
+    }
+  }
+
+  closeAllSubmenus(): void {
+    this.menuItems.forEach(item => {
+      item.isOpen = false;
+    });
   }
 
   // Propriedades do carousel

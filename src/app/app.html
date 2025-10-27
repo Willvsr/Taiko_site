@@ -12,15 +12,42 @@
 
         <!-- Menu Desktop -->
         <nav class="desktop-menu">
-        <a 
-            *ngFor="let item of menuItems; let i = index"
-            [href]="item.href"
-            [class.active]="item.active"
-            class="menu-link"
-            (click)="setActiveItem(i)"
-        >
-            {{ item.label }}
-        </a>
+            <ul>
+                <li *ngFor="let item of menuItems" 
+                    [class.has-submenu]="item.submenu"
+                    [class.menu-open]="item.isOpen">
+                    
+                    <!-- Item principal com submenu -->
+                    <a *ngIf="item.submenu"
+                    href="#"
+                    (click)="toggleSubmenu(item, $event)"
+                    [class.active]="item.active"
+                    class="menu-link">
+                        {{ item.label }}
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </a>
+                    
+                    <!-- Item simples sem submenu -->
+                    <a *ngIf="!item.submenu"
+                    [href]="item.href"
+                    [class.active]="item.active"
+                    class="menu-link"
+                    (click)="setActiveItem(menuItems.indexOf(item))">
+                        {{ item.label }}
+                    </a>
+
+                    <!-- Submenu -->
+                    <ul *ngIf="item.submenu && item.isOpen" class="submenu">
+                        <li *ngFor="let sub of item.submenu">
+                            <a [href]="sub.href" class="submenu-link">
+                                {{ sub.label }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
 
         <!-- Login Desktop -->
@@ -45,7 +72,7 @@
         <span></span>
         </button>
     </div>
-    </header>
+</header>
 
         <!-- Mobile Menu Overlay -->
         <div 
@@ -77,15 +104,37 @@
             <!-- Menu Items -->
             <nav class="mobile-nav">
             <ul class="mobile-menu-list">
-                <li *ngFor="let item of menuItems; let i = index">
-                <a 
+                <li *ngFor="let item of menuItems; let i = index" 
+                    [class.menu-open]="item.isOpen">
+                
+                <a *ngIf="!item.submenu"
                     [href]="item.href"
                     [class.active]="item.active"
                     class="mobile-menu-link"
-                    (click)="setActiveItem(i)"
-                >
+                    (click)="setActiveItem(i)">
                     {{ item.label }}
                 </a>
+                
+                <a *ngIf="item.submenu"
+                    href="#"
+                    (click)="toggleSubmenu(item, $event)"
+                    [class.active]="item.active"
+                    class="menu-link">
+                        {{ item.label }}
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </a>
+                
+                <ul *ngIf="item.submenu" class="mobile-submenu">
+                    <li *ngFor="let sub of item.submenu">
+                    <a [href]="sub.href"
+                        class="mobile-submenu-link"
+                        (click)="closeMenu()">
+                        {{ sub.label }}
+                    </a>
+                    </li>
+                </ul>
                 </li>
             </ul>
             </nav>
