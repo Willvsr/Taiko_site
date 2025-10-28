@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
       <div class="content-row">
         <div class="image-content">
           <div class="circle-image crop-right">
-            <img src="/assets/taiko1.jpg" alt="Taiko com diversidade">
+            <img src="/assets/Ativo_1.png" alt="Taiko com diversidade">
           </div>
         </div>
         <div class="text-content">
@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
       <div class="content-row reverse">
         <div class="image-content">
           <div class="circle-image crop-left">
-            <img src="/assets/taiko1.jpg" alt="Levamos a tradição e cultura">
+            <img src="/assets/Ativo_2.png" alt="Levamos a tradição e cultura">
           </div>
         </div>
         <div class="text-content">

@@ -219,18 +219,17 @@ body {
 // Menu Desktop - Ajuste de alinhamento
 .desktop-menu {
   > ul {
-    display: flex; // Apenas o menu principal é flex
+    display: flex;
     list-style: none;
     gap: 2rem;
     margin: 0;
     padding: 0;
     
-    // 🔥 IMPORTANTE: Os submenus NÃO herdam flex
     .submenu {
-      display: block !important; // Força display block
+      display: block !important; 
       
       li {
-        display: block !important; // Força display block nos itens
+        display: block !important; 
       }
     }
   }
@@ -633,6 +632,148 @@ body {
     transform: translateY(-50%);
 }
 
+sobre-section {
+  position: relative;
+  background: $white;
+  padding: 80px 0;
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sobre-title {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 60px;
+  padding-left: 80px;
+
+  h1 {
+    color: #000;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+  }
+}
+
+/* ===============================
+   TIMELINE
+================================== */
+
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    background: #b91c1c; // vermelho escuro
+    transform: translateX(-50%);
+    border-radius: 3px;
+  }
+}
+
+/* Cada item da timeline */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 20px 60px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: left;
+
+  &:nth-child(even) {
+    align-items: flex-start;
+    text-align: left;
+    left: 50%;
+    margin-top: -340px;
+  }
+
+  &:nth-child(odd) {
+    left: 0;
+    margin-bottom: -40px;
+  }
+
+  /* Bolinha de conexão */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    right: -12px;
+    width: 25px;
+    height: 25px;
+    background-color: #b91c1c;
+    background-image: url('/assets/Tomoe.png');
+    background-size: 80%;     // ajusta o tamanho do ícone dentro do círculo
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:nth-child(even)::before {
+    left: -12px;
+    right: auto;
+  }
+
+  .image-box {
+    width: 240px;
+    height: 140px;
+    border-radius: 20px;
+    background: #d9d9d9;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #000;
+    max-width: 400px;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 60px;
+    text-align: left;
+    align-items: flex-start;
+
+    &::before {
+      left: 15px;
+      right: auto;
+    }
+  }
+}
+
+
+
 /* Events Section - Versão Otimizada */
 .featured-events {
   padding: 80px 40px;
@@ -992,7 +1133,6 @@ body {
     transform: translateY(-2px);
 }
 
-// ... (o restante do seu código responsivo permanece igual)}
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 /* 4k HD Desktop: 3840px+ */
