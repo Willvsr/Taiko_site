@@ -916,8 +916,6 @@ body {
   text-align: center;
   margin-top: 80px;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 20px;
   
   h2 {
     font-family: "Noto Sans JP", sans-serif;
@@ -952,18 +950,8 @@ body {
 .historia-img-container {
   flex: 1;
   position: relative;
-  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-10px);
-    
-    .img-overlay {
-      opacity: 1;
-    }
-  }
+
 }
 
 .historia-img {
@@ -971,27 +959,6 @@ body {
   height: 250px;
   object-fit: cover;
   display: block;
-}
-
-.img-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(252, 211, 77, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  
-  h4 {
-    font-family: "Noto Sans JP", sans-serif;
-    font-size: 20px;
-    color: $black-menu;
-    margin: 0;
-  }
 }
 
 /* Responsivo */
