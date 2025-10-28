@@ -1,3 +1,39 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home.component';
+import { SobreComponent } from './pages/sobre.component';
+import { SobreHistoriaComponent } from './pages/sobre-historia.component';
+import { SobreValoresComponent } from './pages/sobre-valores.component';
+import { SobreMascoteComponent } from './pages/sobre-mascote.component';
+import { SobreMembrosComponent } from './pages/sobre-membros.component';
+import { SobreCurriculoComponent } from './pages/sobre-curriculo.component';
+import { ContatoComponent } from './pages/contato.component';
+import { ContatoOficinasComponent } from './pages/contato-oficinas.component';
+import { ContatoDuvidasComponent } from './pages/contato-duvidas.component';
+import { ContatoFaleComponent } from './pages/contato-fale.component';
+import { ProjetosComponent } from './pages/projetos.component';
+import { ParticiparComponent } from './pages/participar.component';
+import { CalendarioComponent } from './pages/calendario.component';
+import { GaleriaComponent } from './pages/galeria.component';
+import { ApoieComponent } from './pages/apoie.component';
+import { LoginComponent } from './pages/login.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+	{ path: '', component: HomeComponent },
+	{ path: 'sobre', component: SobreComponent },
+	{ path: 'sobre/historia', component: SobreHistoriaComponent },
+	{ path: 'sobre/valores', component: SobreValoresComponent },
+	{ path: 'sobre/mascote', component: SobreMascoteComponent },
+	{ path: 'sobre/membros', component: SobreMembrosComponent },
+	{ path: 'sobre/curriculo', component: SobreCurriculoComponent },
+	{ path: 'contato', component: ContatoComponent },
+	{ path: 'contato/oficinas', component: ContatoOficinasComponent },
+	{ path: 'contato/duvidas', component: ContatoDuvidasComponent },
+	{ path: 'contato/fale', component: ContatoFaleComponent },
+	{ path: 'projetos', component: ProjetosComponent },
+	{ path: 'participar', component: ParticiparComponent },
+	{ path: 'calendario', component: CalendarioComponent },
+	{ path: 'galeria', component: GaleriaComponent },
+	{ path: 'apoie', component: ApoieComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: '**', redirectTo: '' }
+];

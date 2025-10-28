@@ -12,8 +12,8 @@ export class App {
   protected readonly title = signal('kouryuu_site');
   isMenuOpen = false;
   menuItems = [
-    { label: 'Home', href: '#home', active: true },
-    { label: 'Sobre nós', href: '#sobre', active: false, isOpen: false,
+    { label: 'Home', href: '/', active: true },
+    { label: 'Sobre nós', href: '/sobre', active: false, isOpen: false,
       submenu: [
       { label: 'História', href: '/sobre/historia' },
       { label: 'Missão e valores', href: '/sobre/valores' },
@@ -22,18 +22,18 @@ export class App {
       { label: 'Currículo', href: '/sobre/curriculo' },
     ]
      },
-    { label: 'Projetos', href: '#projetos', active: false },
-    { label: 'Contato', href: '#contato', active: false, isOpen: false,
+    { label: 'Projetos', href: '/projetos', active: false },
+    { label: 'Contato', href: '/contato', active: false, isOpen: false,
       submenu: [
       { label: 'Solicitar apresentação / oficinas', href: '/contato/oficinas' },
       { label: 'Dúvidas', href: '/contato/duvidas' },
       { label: 'Fale conosco', href: '/contato/fale' },
     ]
      },
-    { label: 'Como participar', href: '#participar', active: false },
-    { label: 'Calendário', href: '#calendario', active: false },
-    { label: 'Galeria', href: '#galeria', active: false },
-    { label: 'Apoie', href: '#apoie', active: false }
+    { label: 'Como participar', href: '/participar', active: false },
+    { label: 'Calendário', href: '/calendario', active: false },
+    { label: 'Galeria', href: '/galeria', active: false },
+    { label: 'Apoie', href: '/apoie', active: false }
   ];
 
   toggleMenu(): void {
