@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,87 +7,124 @@ import { CommonModule } from '@angular/common';
   selector: 'app-sobre-mascote',
   template: `
     <div class="sobre-mascote">
+      <!-- Topo da página -->
       <h1>O Mascote Don-chan</h1>
       
-      <div class="mascote-content">
-        <!-- Carrossel para as fotos do mascote -->
+      <!-- Seção Como Nasceu a Ideia -->
+      <div class="ideia-section">
+        <div class="ideia-content">
+          <div class="ideia-texto">
+            <h2>Como nasceu a ideia</h2>
+            <h3>Frase síntese</h3>
+            <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+          </div>
+          <div class="ideia-imagem">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png" alt="Mascote Don-chan" class="don-chan-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção Criação -->
+      <div class="criacao-section">
+        <h2>Criação</h2>
+        <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        
+        <!-- Carrossel melhorado -->
         <div class="carousel-container">
           <div class="carousel-wrapper">
             <div class="carousel-track">
               <div class="carousel-slide" *ngFor="let foto of fotosMascote; let i = index" [class.active]="i === currentSlide">
                 <img [src]="foto.image" [alt]="foto.alt" class="slide-image-mascote">
+                <div class="slide-overlay">
+                  <h3>{{ foto.title }}</h3>
+                </div>
               </div>
             </div>
 
+            <!-- Botões do carrossel melhorados -->
             <button class="carousel-btn prev" (click)="prevSlide()" aria-label="Foto anterior">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="15,18 9,12 15,6"></polyline>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
               </svg>
             </button>
 
             <button class="carousel-btn next" (click)="nextSlide()" aria-label="Próxima foto">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9,18 15,12 9,6"></polyline>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
               </svg>
             </button>
 
+            <!-- Indicadores melhorados -->
             <div class="carousel-indicators">
               <button *ngFor="let foto of fotosMascote; let i = index" 
                       [class.active]="i === currentSlide" 
                       (click)="goToSlide(i)" 
-                      aria-label="Ir para foto {{ i + 1 }}"></button>
+                      aria-label="Ir para foto {{ i + 1 }}">
+                <span class="indicator-progress"></span>
+              </button>
             </div>
           </div>
         </div>
 
-        <!-- Informações da foto atual -->
+        <!-- Informações da foto atual do carrossel -->
         <div class="foto-info" *ngIf="fotosMascote[currentSlide]">
-          <h3>{{ fotosMascote[currentSlide].title }}</h3>
           <p>{{ fotosMascote[currentSlide].description }}</p>
         </div>
       </div>
 
-      <div class="sobre-mascote-texto">
-        <h2>Como nasceu a ideia</h2>
-        <h3>Frase síntese</h3>
+      <!-- Nova Seção: História do Personagem -->
+      <div class="historia-section">
+        <h2>História do personagem</h2>
         <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-      </div>
-
-      <div class="sobre-mascote-texto">
-        <h2>Criação</h2>
-        <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+        
+        <div class="historia-imagens">
+          <div class="historia-img-container">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png" alt="História 1 do Don-chan" class="historia-img">
+            <div class="img-overlay">
+            </div>
+          </div>
+          <div class="historia-img-container">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png" alt="História 2 do Don-chan" class="historia-img">
+            <div class="img-overlay">
+            </div>
+          </div>
+          <div class="historia-img-container">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png" alt="História 3 do Don-chan" class="historia-img">
+            <div class="img-overlay">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `
 })
-export class SobreMascoteComponent {
+export class SobreMascoteComponent implements OnInit, OnDestroy {
   currentSlide = 0;
   
-  // Dados específicos para as fotos do mascote
   fotosMascote = [
     {
-      title: 'Don-chan - Versão Final',
-      description: 'O mascote oficial do grupo Ishindaiko',
-      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png',
-      alt: 'Mascote Don-chan versão final'
-    },
-    {
-      title: 'Primeiro Esboço',
-      description: 'Primeira concepção do Don-chan',
+      title: '',
+      description: '',
       image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png',
       alt: 'Primeiro esboço do mascote'
     },
     {
-      title: 'Evolução do Design',
-      description: 'Processo de desenvolvimento do personagem',
+      title: '',
+      description: '',
       image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png',
       alt: 'Evolução do design do mascote'
     },
     {
-      title: 'Don-chan em Ação',
-      description: 'O mascote durante apresentações',
+      title: '',
+      description: '',
       image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png',
-      alt: 'Mascote em apresentação'
+      alt: 'Versões intermediárias do mascote'
+    },
+    {
+      title: '',
+      description: '',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Desenho-don-chan.png',
+      alt: 'Mascote Don-chan versão final'
     }
   ];
 
@@ -95,14 +132,6 @@ export class SobreMascoteComponent {
 
   ngOnInit(): void {
     this.startCarouselAutoplay();
-    this.preloadImages();
-  }
-
-  private preloadImages() {
-    this.fotosMascote.forEach(foto => {
-      const img = new Image();
-      img.src = foto.image;
-    });
   }
 
   ngOnDestroy(): void {
