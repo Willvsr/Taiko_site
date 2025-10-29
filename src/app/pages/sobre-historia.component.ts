@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   selector: 'app-sobre-historia',
   template: `
-    <div class="sobre-section">
-  <div class="sobre-title">
+    <div class="sobre-title">
     <h1>História</h1>
   </div>
+    <div class="sobre-section">
+
 
   <div class="timeline">
 
