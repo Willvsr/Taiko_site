@@ -6,11 +6,14 @@ import { SobreValoresComponent } from './pages/sobre-valores.component';
 import { SobreMascoteComponent } from './pages/sobre-mascote.component';
 import { SobreMembrosComponent } from './pages/sobre-membros.component';
 import { SobreCurriculoComponent } from './pages/sobre-curriculo.component';
-import { ContatoComponent } from './pages/contato.component';
-import { ContatoOficinasComponent } from './pages/contato-oficinas.component';
+import { SolicitacaoComponent } from './pages/contato.component';
+import { SolicitacaoComponent as ContatoOficinasComponent } from './pages/contato-oficinas.component';
 import { ContatoDuvidasComponent } from './pages/contato-duvidas.component';
 import { ContatoFaleComponent } from './pages/contato-fale.component';
 import { ProjetosComponent } from './pages/projetos.component';
+import { ProjetoCenibra1Component } from './pages/projeto-cenibra1.component';
+import { ProjetoCenibra2Component } from './pages/projeto-cenibra2.component';
+import { ProjetoCenibra3Component } from './pages/projeto-cenibra3.component';
 import { ParticiparComponent } from './pages/participar.component';
 import { CalendarioComponent } from './pages/calendario.component';
 import { GaleriaComponent } from './pages/galeria.component';
@@ -18,22 +21,25 @@ import { ApoieComponent } from './pages/apoie.component';
 import { LoginComponent } from './pages/login.component';
 
 export const routes: Routes = [
-	{ path: '', component: HomeComponent },
-	{ path: 'sobre', component: SobreComponent },
-	{ path: 'sobre/historia', component: SobreHistoriaComponent },
-	{ path: 'sobre/valores', component: SobreValoresComponent },
-	{ path: 'sobre/mascote', component: SobreMascoteComponent },
-	{ path: 'sobre/membros', component: SobreMembrosComponent },
-	{ path: 'sobre/curriculo', component: SobreCurriculoComponent },
-	{ path: 'contato', component: ContatoComponent },
-	{ path: 'contato/oficinas', component: ContatoOficinasComponent },
-	{ path: 'contato/duvidas', component: ContatoDuvidasComponent },
-	{ path: 'contato/fale', component: ContatoFaleComponent },
-	{ path: 'projetos', component: ProjetosComponent },
-	{ path: 'participar', component: ParticiparComponent },
-	{ path: 'calendario', component: CalendarioComponent },
-	{ path: 'galeria', component: GaleriaComponent },
-	{ path: 'apoie', component: ApoieComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: '**', redirectTo: '' }
+    { path: '', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'sobre/historia', component: SobreHistoriaComponent },
+    { path: 'sobre/valores', component: SobreValoresComponent },
+    { path: 'sobre/mascote', component: SobreMascoteComponent },
+    { path: 'sobre/membros', component: SobreMembrosComponent },
+    { path: 'sobre/curriculo', component: SobreCurriculoComponent },
+    { path: 'contato', component: SolicitacaoComponent },
+    { path: 'contato/oficinas', component: ContatoOficinasComponent },
+    { path: 'contato/duvidas', component: ContatoDuvidasComponent },
+    { path: 'contato/fale', component: ContatoFaleComponent },
+    { path: 'projetos', component: ProjetosComponent },
+    { path: 'projetos/cenibra-1', component: ProjetoCenibra1Component },
+    { path: 'projetos/cenibra-2', component: ProjetoCenibra2Component },
+    { path: 'projetos/cenibra-3', component: ProjetoCenibra3Component },
+    { path: 'participar', component: ParticiparComponent },
+    { path: 'calendario', component: CalendarioComponent },
+    { path: 'galeria', component: GaleriaComponent },
+    { path: 'apoie', component: ApoieComponent },
+    { path: 'login', component: LoginComponent },
+    { path: '**', redirectTo: '' }
 ];

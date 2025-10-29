@@ -38,12 +38,16 @@ export class App {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
-    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+    if (typeof document !== 'undefined' && document && document.body) {
+      document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+    }
   }
 
   closeMenu(): void {
     this.isMenuOpen = false;
-    document.body.style.overflow = 'auto';
+    if (typeof document !== 'undefined' && document && document.body) {
+      document.body.style.overflow = 'auto';
+    }
   }
 
   setActiveItem(index: number): void {

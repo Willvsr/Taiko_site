@@ -1000,9 +1000,9 @@ body {
 ================================== */
 
 .timeline {
-  position: relative;
+  position: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 
   &::before {
@@ -1731,7 +1731,441 @@ body {
     }
 }
 
-/* ===== RESPONSIVE BREAKPOINTS ===== */
+.projetos-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+  background-color: #fff;
+
+  h2 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #000;
+    margin-bottom: 30px;
+  }
+
+  /* --- Banners do topo (duas imagens lado a lado) --- */
+  .banners-top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 40px;
+
+    .banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, filter 0.3s ease;
+
+      img {
+        width: 500px;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      .banner-caption {
+        margin-top: 10px;
+        font-size: 17px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+        filter: brightness(1.05);
+      }
+    }
+  }
+
+  /* --- Banner inferior --- */
+  .banner-bottom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: -10px;
+
+    .banner.center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+
+      img {
+        width: 540px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      .banner-caption {
+        margin-top: 10px;
+        font-size: 17px;
+        text-align: center;
+        font-weight: 600;
+        max-width: 150px;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+        filter: brightness(1.05);
+      }
+    }
+  }
+
+  /* --- Responsividade --- */
+  @media (max-width: 1024px) {
+    h2 {
+      font-size: 30px;
+    }
+
+    .banners-top {
+      gap: 25px;
+
+      .banner img {
+        width: 420px;
+        height: 240px;
+      }
+    }
+
+    .banner-bottom .banner.center img {
+      width: 440px;
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 26px;
+    }
+
+    .banners-top {
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+
+      .banner img {
+        width: 90%;
+        height: auto;
+      }
+    }
+
+    .banner-bottom .banner.center img {
+      width: 90%;
+      height: auto;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.projeto-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: 'Baloo 2', sans-serif;
+  text-align: center;
+  background-color: #fff;
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #111;
+  }
+
+  .projeto-banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    img {
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+    }
+  }
+
+  .projeto-descricao {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+
+    p + p {
+      margin-top: 1rem;
+    }
+  }
+
+  .projeto-parceiros {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin: 40px 0 60px;
+
+        img {
+          height: 140px;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+          filter: grayscale(20%);
+          
+          &:hover {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+          }
+        }
+      }
+
+  .voltar {
+    margin-top: 40px;
+
+    a {
+      color: #111;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #f59e0b;
+      }
+    }
+  }
+
+  /* Responsividade */
+  @media (max-width: 900px) {
+    h1 {
+      font-size: 30px;
+    }
+
+    .projeto-parceiros {
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 40px 15px;
+
+    h1 {
+      font-size: 26px;
+    }
+
+    .projeto-descricao {
+      font-size: 15px;
+    }
+
+    .projeto-parceiros .logos img {
+      height: 50px;
+    }
+  }
+}
+
+/* CONTAINER PRINCIPAL */
+.solicitacao-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 15px;
+  background-color: $white;
+
+  h1 {
+    text-align: left;
+    color: $black-menu;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  p {
+    text-align: left;
+    color: $gray-text;
+    font-size: 16px;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* BORDA AMARELA AO REDOR DO FORMULÁRIO */
+form {
+  background-color: $yellow-primary;
+  padding: 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+/* CAIXA BRANCA DO FORMULÁRIO */
+.form-box {
+  background-color: $white;
+  padding: 35px 30px;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    text-align: center;
+    color: $black-menu;
+    margin: 20px 0 15px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  label {
+    color: $black-menu;
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  input,
+  textarea {
+    background-color: #e6e6e6;
+    border: 1px solid #dcdcdc;
+    margin-top: 8px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+    &:focus {
+      border-color: $black-menu;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06),
+        0 0 0 2px rgba($black-menu, 0.2);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+.radio-group {
+  display: flex;
+  flex-direction: column; /* empilha os itens verticalmente */
+  gap: 8px;
+  margin-top: 4px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    accent-color: $yellow-hover; /* usa o amarelo do tema */
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-top: 3px;
+  }
+}
+
+  button {
+    margin-top: 30px;
+    padding: 12px 0;
+    background-image: linear-gradient(to bottom, #ffc107, #ffa000);
+    border: none;
+    border-radius: 50px;
+    color: $black-menu;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-image: linear-gradient(to bottom, #ffcd38, #ffb300);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    &:disabled {
+      background-image: linear-gradient(to bottom, #ffe082, #ffecb3);
+      color: $gray-text;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+}
+
+/* MENSAGEM DE SUCESSO */
+.sucesso-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
+}
+
+.sucesso-box {
+  background-color: $white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  h2 {
+    color: $black-menu;
+    margin-bottom: 15px;
+    font-size: 28px;
+  }
+
+  p {
+    color: $gray-text;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .donchan {
+    margin-top: 25px;
+    font-size: 14px;
+    color: $gray-text;
+    font-style: italic;
+  }
+}
+
+/* ===== RESPONSIVE BREAKPOINTS =========================================================================================================================================================================== */
 /* 4k HD Desktop: 3840px+ */
 @media (min-width: 3840px) {
     .header-container {

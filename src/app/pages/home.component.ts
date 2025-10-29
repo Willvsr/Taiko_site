@@ -117,17 +117,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startCarouselAutoplay();
-    if (typeof window !== 'undefined') {
-      this.preloadImages();
-    }
+    // Preload de imagens removido para SSR/prerendering mais rápido
   }
 
   private preloadImages() {
-    if (typeof Image === 'undefined') return;
-    this.featuredEvents.forEach(event => {
-      const img = new Image();
-      img.src = event.image;
-    });
+    // Preload de imagens desabilitado para SSR/prerendering
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { App } from './app/app';
-import { config } from './app/app.config.server';
 
-const bootstrap = () => bootstrapApplication(App, config);
+const bootstrap = async () => {
+	try {
+ 		return await bootstrapApplication(App);
+	} catch (err) {
+		// Make sure any bootstrap errors are visible during route extraction
+		console.error('SERVER BOOTSTRAP ERROR:', err && ((err as any).stack || err));
+		throw err;
+	}
+};
 
 export default bootstrap;
