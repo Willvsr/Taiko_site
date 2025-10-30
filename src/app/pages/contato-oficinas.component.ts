@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
         por favor preencha o formulário abaixo:
       </p>
 
-      <form (ngSubmit)="enviarFormulario()" #solicitacaoForm="ngForm">
+      <form #solicitacaoForm="ngForm">
         <div class="form-box">
           <h2>Dados do evento</h2>
 
@@ -55,7 +55,7 @@ import { RouterModule } from '@angular/router';
           <label>WhatsApp:</label>
           <input type="text" name="whatsapp" [(ngModel)]="formData.whatsapp" />
 
-          <button type="submit" [disabled]="!solicitacaoForm.valid">Enviar</button>
+          <button type="button" (click)="enviarFormulario()" [disabled]="!solicitacaoForm.valid || enviando">Enviar</button>
         </div>
       </form>
     </div>
@@ -77,6 +77,7 @@ import { RouterModule } from '@angular/router';
 
 export class SolicitacaoComponent {
   enviado = false;
+  enviando = false;
 
   formData = {
     nomeEvento: '',
@@ -92,10 +93,12 @@ export class SolicitacaoComponent {
   };
 
   async enviarFormulario() {
+    if (this.enviando || this.enviado) return false;
+    this.enviando = true;
     try {
       const serviceId = 'service_v4myuzi';
       const templateId = 'template_80utwcq';
-      const publicKey = 'KrBiWfn5J3m0XVd9S'; // substitua pelo seu código do EmailJS
+      const publicKey = 'KrBiWfn5J3m0XVd9S';
 
       const params = {
         to_email: 'taiko.anbi@gmail.com',
@@ -107,6 +110,9 @@ export class SolicitacaoComponent {
     } catch (error) {
       console.error('Erro ao enviar e-mail:', error);
       alert('Ocorreu um erro ao enviar. Tente novamente mais tarde.');
+    } finally {
+      this.enviando = false;
     }
+    return false;
   }
 }

@@ -13,7 +13,7 @@
         <!-- Menu Desktop -->
         <nav class="desktop-menu">
             <ul>
-                <li *ngFor="let item of menuItems" 
+                <li *ngFor="let item of menuItems; let i = index" 
                     [class.has-submenu]="item.submenu"
                     [class.menu-open]="item.isOpen">
                     
@@ -41,7 +41,7 @@
                     <!-- Submenu -->
                     <ul *ngIf="item.submenu && item.isOpen" class="submenu">
                         <li *ngFor="let sub of item.submenu">
-                            <a [routerLink]="sub.href" class="submenu-link">
+                            <a [routerLink]="sub.href" class="submenu-link" (click)="setActiveItem(i); closeAllSubmenus()">
                                 {{ sub.label }}
                             </a>
                         </li>
@@ -130,7 +130,7 @@
                     <li *ngFor="let sub of item.submenu">
                     <a [routerLink]="sub.href"
                         class="mobile-submenu-link"
-                        (click)="closeMenu()">
+                        (click)="setActiveItem(i); closeMenu()">
                         {{ sub.label }}
                     </a>
                     </li>

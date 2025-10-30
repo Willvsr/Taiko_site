@@ -6,16 +6,12 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   selector: 'app-apoie',
   template: `
-    <div class="apoie-section">
-      <h2>Apoie o Kouryuu Daiko</h2>
+    <div class="sobre-title">
+      <h1>Apoie</h1>
       <div class="apoie-content">
         <section>
-          <h3>Como Apoiar</h3>
-          <p>Existem várias formas de apoiar nosso trabalho...</p>
-        </section>
-        <section>
-          <h3>Seja um Parceiro</h3>
-          <p>Informações para empresas e instituições interessadas em parcerias...</p>
+          <h3>Por que apoiar esse projeto?</h3>
+          <p>Qorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.</p>
         </section>
       </div>
     </div>

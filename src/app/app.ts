@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationStart } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -35,6 +35,11 @@ export class App {
     { label: 'Galeria', href: '/galeria', active: false },
     { label: 'Apoie', href: '/apoie', active: false }
   ];
+
+  // Subscription para eventos de rota
+  private routerSubscription: any;
+
+  constructor(private router: Router) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -116,6 +121,15 @@ toggleSubmenu(item: any, event?: Event): void {
       if (typeof window !== 'undefined') {
     this.preloadImages();
   }
+    // Fecha submenus quando a rota mudar (ex.: navegação via router)
+    if (this.router) {
+      this.routerSubscription = this.router.events.subscribe((event: any) => {
+        if (event instanceof NavigationStart) {
+          this.closeAllSubmenus();
+          this.closeMenu();
+        }
+      });
+    }
 }
     private preloadImages() {
       if (typeof Image === 'undefined') return;
@@ -130,6 +144,10 @@ toggleSubmenu(item: any, event?: Event): void {
     // Limpar interval quando o componente for destruído
     if (this.carouselInterval) {
       clearInterval(this.carouselInterval);
+    }
+    // Unsubscribe router
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
   }
 
