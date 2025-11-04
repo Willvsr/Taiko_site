@@ -1929,15 +1929,7 @@ body {
         img {
           height: 140px;
           object-fit: contain;
-          transition: transform 0.3s ease;
-          filter: grayscale(20%);
-          
-          &:hover {
-            transform: scale(1.05);
-            filter: grayscale(0%);
           }
-        }
-      }
 
   .voltar {
     margin-top: 40px;
