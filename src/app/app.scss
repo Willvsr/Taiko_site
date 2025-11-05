@@ -271,6 +271,61 @@ body {
   @media (min-width: 769px) {
     display: flex;
     align-items: center;
+    gap: 1rem;
+
+    .lang-menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: relative;
+      
+      .lang-selector {
+        color: $gray-text;
+        text-decoration: none;
+        font-family: 'Baloo 2', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $yellow-hover;
+        }
+
+        .dropdown-arrow {
+          transition: transform 0.3s ease;
+          opacity: 0.7;
+        }
+
+        &:hover .dropdown-arrow {
+          opacity: 1;
+        }
+      }
+
+      &.menu-open .lang-selector {
+        color: $yellow-primary;
+        
+        .dropdown-arrow {
+          transform: rotate(180deg);
+          opacity: 1;
+        }
+      }
+
+      .lang-submenu {
+        right: 0;
+        left: auto;
+        min-width: 140px;
+        margin-top: 8px;
+
+        &::before {
+          left: auto;
+          right: 20px;
+        }
+      }
+    }
   }
 }
 
@@ -555,23 +610,25 @@ body {
     margin-bottom: 80px;
     gap: 80px;
     position: relative;
-    max-width: 1400px;
+    max-width: 100%;
+    max-height: 40rem;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 80px;
+    margin-top: 20rem;
+    margin-bottom: 20rem;
 }
 
 .text-content {
     flex: 1;
-    max-width: 500px;
+    max-width: 700px;
     z-index: 2;
     position: relative;
 }
 
-.text-content h2 {
+.text-content h1 {
     font-family: "Noto Sans JP", sans-serif;
-    font-size: 32px;
-    font-weight: 600;
+    font-size: 48px;
+    height: 66px;
     color: #000;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -579,7 +636,8 @@ body {
 
 .text-content p {
     font-family: "Baloo 2", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 500;
     color: #000;
     line-height: 1.6;
 }
@@ -590,46 +648,41 @@ body {
 }
 
 .circle-image {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+    width: 35rem;
+    height: 50rem;
+    background-color: $white;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .circle-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-}
-
-.circle-image.crop-right img {
-    object-position: 100% center;
-}
-
-.circle-image.crop-left img {
-    object-position: 0% center;
 }
 
 /* Desktop Layout - Posicionamento dos elementos */
 .content-row:first-child .text-content {
-    margin-left: 40%;
+    margin-left: 35rem;
+    text-align: left;
+}
+.content-row.reverse{
+  margin-top:40rem;
+}
+.content-row.reverse .text-content {
+    h1{
+    text-align: right;
+    }
+    margin-left: 35rem;
     text-align: left;
 }
 
-.content-row:last-child .text-content {
-    margin-right: 40%;
-    text-align: right;
-}
-
 .content-row:first-child .image-content {
-    left: -150px;
+    left: -3rem;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .content-row:last-child .image-content {
-    right: -150px;
+    right: -3rem;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -1123,7 +1176,7 @@ body {
 
   h3 {
     font-family: "Noto Sans JP", sans-serif;
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 50px;
@@ -1153,30 +1206,20 @@ body {
     height: 100%;
   }
 
-  .carousel-slide {
-    width: 100%;
-    display: none;
-    transition: opacity 0.5s ease;
+.carousel-slide {
+  display: block !important; /* Força mostrar todos */
+  opacity: 1 !important;
+  position: relative !important;
+}
 
-    &.active {
-      display: block;
-      animation: fadeIn 0.6s ease;
-    }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .slide-image {
-    width: 100%;
-    height: 400px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 20px;
-  }
+.slide-image {
+  width: 1300px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+}
 
   /* Informações abaixo do carrossel */
   .event-info-container {
@@ -3024,921 +3067,4 @@ form {
   .avatar-placeholder::before {
     font-size: 40px !important;
   }
-}
-
-/* ===== RESPONSIVE BREAKPOINTS =========================================================================================================================================================================== */
-/* 4k HD Desktop: 3840px+ */
-@media (min-width: 3840px) {
-    .header-container {
-        padding: auto;
-    }
-
-    .logo {
-        height: 200px;
-    }
-
-    .menu-icon span {
-        width: 50px;
-        height: 6px;
-    }
-    
-
-    .main-section {
-        padding: 600px 80px;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 200px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 1500px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 84px;
-        font-weight: 700;
-        margin-bottom: 35px;
-    }
-    
-    .text-content p {
-        font-size: 56px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 1700px;
-        height: 1700px;
-    }
-    
-    .content-row:first-child {
-        padding-left: 80px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 30%;
-        margin-top: 8%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -20%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        padding-right: 80px;
-        padding-top: 20%;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 100%;
-        text-align: right;
-        min-width: 900px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 100%;
-        text-align: left;
-        min-width: 900px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -15%;
-        top: 80%;
-        transform: translateY(-50%);
-    }
-    
-    .footer {
-        padding: 60px 80px;
-    }
-}
-/* 2.5k HD Desktop: 2560px - 3839px */
-@media (min-width: 2560px) and (max-width: 3839px) {
-    .header-container {
-    padding: 20px 150px;
-    }
-
-    .main-section {
-        padding: 200px 80px;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 200px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 750px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 56px;
-        font-weight: 700;
-        margin-bottom: 35px;
-    }
-    
-    .text-content p {
-        font-size: 22px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 1000px;
-        height: 1000px;
-    }
-    
-    .content-row:first-child {
-        padding-left: 80px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 20%;
-        margin-top: 8%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -20%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        padding-right: 80px;
-        padding-top: 20%;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 145%;
-        text-align: right;
-        min-width: 750px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 145%;
-        text-align: left;
-        min-width: 750px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -20%;
-        top: 80%;
-        transform: translateY(-50%);
-    }
-    
-    .footer {
-        padding: 60px 80px;
-    }
-}
-/* Full HD Desktop: 1920px - 2559px */
-@media (min-width: 1920px) and (max-width: 2559px){
-    .header-container {
-        padding: 20px 90px;
-    }
-    
-    .main-section {
-        padding: 200px 80px;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 200px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 750px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 56px;
-        font-weight: 700;
-        margin-bottom: 35px;
-    }
-    
-    .text-content p {
-        font-size: 22px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 900px;
-        height: 900px;
-    }
-    
-    .content-row:first-child {
-        padding-left: 80px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 30%;
-        margin-top: 8%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -20%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        padding-right: 80px;
-        padding-top: 20%;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 40%;
-        text-align: right;
-        min-width: 750px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 40%;
-        text-align: left;
-        min-width: 750px;
-        max-width: 900px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -15%;
-        top: 80%;
-        transform: translateY(-50%);
-    }
-    .footer {
-        padding: 60px 80px;
-    }
-}
-
-/* Large Desktop: 1440px - 1919px */
-@media (max-width: 1919px) and (min-width: 1440px) {
-    .header-container {
-        padding: 20px 90px;
-    }
-    
-    .main-section {
-        padding: 180px 80px;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 80px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 550px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 30px;
-    }
-    
-    .text-content p {
-        font-size: 18px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 500px;
-        height: 500px;
-    }
-    
-    .content-row:first-child {
-        justify-content: flex-start;
-        padding-left: 60px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 20%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -20%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        justify-content: flex-end;
-        padding-right: 60px;
-    }
-    
-    .content-row:last-child .text-content {
-        margin-right: 20%;
-        text-align: right;
-    }
-    
-    .content-row:last-child .text-content h2 {
-        text-align: right;
-    }
-    
-    .content-row:last-child .text-content p {
-        text-align: left;
-    }
-    
-    .content-row:last-child .image-content {
-        right: -20%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .footer {
-        padding: 50px 60px;
-    }
-}
-
-/* Desktop: 1024px - 1439px */
-@media (max-width: 1439px) and (min-width: 1024px) {
-    .header-container {
-        padding: 20px 90px;
-    }
-    
-    .main-section {
-        padding: 180px 80px;
-    }
-    
-    .content-row {
-        max-width: 1400px;
-        gap: 80px;
-    }
-    
-    .text-content {
-        max-width: 550px;
-    }
-    
-    .circle-image {
-        width: 400px;
-        height: 400px;
-    }
-    
-    .content-row:first-child {
-        justify-content: flex-start;
-        padding-left: 60px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 20%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -30%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        justify-content: flex-end;
-        padding-right: 60px;
-    }
-    
-    .content-row:last-child .text-content {
-        margin-right: -20%;
-        text-align: right;
-    }
-    
-    .content-row:last-child .text-content h2 {
-        text-align: right;
-        min-width: 100px;
-        max-width: 300px;
-    }
-    
-    .content-row:last-child .text-content p {
-        text-align: left;
-        min-width: 100px;
-        max-width: 300px;
-    }
-    
-    .content-row:last-child .image-content {
-        right: -30%;
-        top: 70%;
-        transform: translateY(-50%);
-    }
-
-    .footer {
-        padding: 40px;
-    }
-}
-
-/* Tablet: 768px - 1023px */
-@media (max-width: 1023px) and (min-width: 768px) {
-    .header {
-        padding: 15px 30px;
-    }
-    
-    .main-section {
-        padding: 80px 100px;
-        overflow: visible;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 120px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 550px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 25px;
-    }
-    
-    .text-content p {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 350px;
-        height: 350px;
-    }
-    
-    .content-row:first-child {
-        padding-left: 30px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 30%;
-        margin-top: 12%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -40%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        padding-right: 30px;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 10%;
-        margin-top: 0%;
-        text-align: right;
-        min-width: 350px;
-        max-width: 350px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 30%;
-        margin-top: 0%;
-        text-align: left;
-        min-width: 300px;
-        max-width: 600px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -40%;
-        top: 30%;
-        transform: translateY(-50%);
-    }
-    
-    .featured-events {
-    padding: 60px 20px;
-
-    h3 {
-      font-size: 24px;
-      margin-bottom: 30px;
-    }
-
-    .carousel-wrapper {
-      height: 300px;
-    }
-
-    .slide-overlay {
-      padding: 30px 20px;
-
-      h4 {
-        font-size: 20px;
-      }
-
-      .event-details {
-        flex-direction: column;
-        gap: 10px;
-
-        .location,
-        .date {
-          font-size: 14px;
-        }
-      }
-
-      .event-btn {
-        font-size: 14px;
-        padding: 10px 20px;
-      }
-    }
-
-    .carousel-btn {
-      width: 40px;
-      height: 40px;
-
-      &.prev {
-        left: 10px;
-      }
-
-      &.next {
-        right: 10px;
-      }
-
-      svg {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
-}
-
-/* Mobile Large: 481px - 767px */
-@media (max-width: 767px) and (min-width: 481px) {
-    .header {
-        padding: 15px 30px;
-    }
-    
-    .main-section {
-        padding: 80px 100px;
-        overflow: visible;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 120px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 550px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 25px;
-    }
-    
-    .text-content p {
-        font-size: 16px;
-        line-height: 1.7;
-    }
-    
-    .circle-image {
-        width: 350px;
-        height: 350px;
-    }
-    
-    .content-row:first-child {
-        padding-left: 30px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 30%;
-        margin-top: 12%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -40%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        padding-right: 30px;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 10%;
-        margin-top: 0%;
-        text-align: right;
-        min-width: 400px;
-        max-width: 600px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 40%;
-        margin-top: 0%;
-        text-align: left;
-        min-width: 300px;
-        max-width: 600px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -40%;
-        top: 30%;
-        transform: translateY(-50%);
-    }
-    
-    .events {
-        padding: 50px 30px;
-    }
-    
-    .events-grid {
-        max-width: 700px;
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    
-    .event-card.large {
-        grid-row: span 1;
-    }
-    
-    .event-card.large .event-image {
-        height: 200px;
-    }
-
-    .footer {
-        padding: 25px 20px;
-    }
-}
-
-/* Mobile Medium: 376px - 480px */
-@media (max-width: 480px) and (min-width: 376px) {
-    .header {
-        padding: 15px 10px;
-    }
-    
-    .header .logo {
-        height: 50px;
-    }
-    
-    .main-section {
-        padding: 10px 0px;
-        overflow: visible;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 80px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 250px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 18px;
-    }
-    
-    .text-content p {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-    
-    .circle-image {
-        width: 240px;
-        height: 240px;
-    }
-    
-    .content-row:first-child {
-        justify-content: flex-start;
-        padding-left: 20px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 40%;
-        margin-top: 18%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -20%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        justify-content: flex-end;
-        padding-right: 20px;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 15%;
-        margin-top: -20%;
-        text-align: right;
-        min-width: 250px;
-        max-width: 280px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 15%;
-        margin-top: 0%;
-        text-align: left;
-        min-width: 250px;
-        max-width: 280px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -25%;
-        top: 30%;
-        transform: translateY(-50%);
-    }
-    
-    .featured-events {
-        padding: 40px 15px;
-
-        .carousel-wrapper {
-        height: 250px;
-        border-radius: 15px;
-        }
-
-        .slide-overlay {
-        padding: 20px 15px;
-
-        h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .event-btn {
-            font-size: 13px;
-            padding: 8px 16px;
-        }
-        }
-    }
-    
-    
-    .footer {
-        padding: 25px 20px;
-    }
-}
-
-/* Mobile Small: 320px - 375px */
-@media (max-width: 375px) {
-    .header {
-        padding: 10px 15px;
-    }
-    
-    .header .logo {
-        height: 45px;
-    }
-    
-    .menu-icon span {
-        width: 22px;
-    }
-    
-    .main-section {
-        padding: 25px 0px;
-        overflow: visible;
-    }
-    
-    .content-row {
-        width: 100%;
-        max-width: none;
-        gap: 0px;
-        margin-bottom: 70px;
-        position: relative;
-    }
-    
-    .text-content {
-        max-width: 200px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .text-content h2 {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 15px;
-    }
-    
-    .text-content p {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-    
-    .circle-image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .content-row:first-child {
-        justify-content: flex-start;
-        padding-left: 15px;
-    }
-    
-    .content-row:first-child .text-content {
-        margin-left: 65%;
-        margin-top: 20%;
-        text-align: left;
-    }
-    
-    .content-row:first-child .image-content {
-        left: -55%;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-    
-    .content-row:last-child {
-        justify-content: flex-end;
-        padding-right: 15px;
-    }
-    
-    .content-row:last-child .text-content h2{
-        margin-left: 95%;
-        margin-top: 18%;
-        text-align: right;
-        min-width: 200px;
-        max-width: 220px;
-    }
-
-    .content-row:last-child .text-content p{
-        margin-left: 95%;
-        margin-top: 18%;
-        text-align: left;
-        min-width: 200px;
-        max-width: 220px;
-    }
-
-    .content-row:last-child .image-content {
-        right: -55%;
-        top: 70%;
-        transform: translateY(-50%);
-    }
-    
-    .events {
-        padding: 25px 15px;
-    }
-    
-    .events h3 {
-        font-size: 20px;
-        margin-bottom: 30px;
-    }
-    
-    .events-grid {
-        max-width: 300px;
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .event-info {
-        padding: 12px;
-    }
-    
-    .event-info h4 {
-        font-size: 15px;
-    }
-    
-    .event-date {
-        font-size: 12px;
-    }
-    
-    .footer {
-        padding: 20px 15px;
-    }
-    
-    .social-icons a {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
 }

@@ -57,8 +57,25 @@
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
             </svg>
-        </a>
-        </div>
+    </a>
+        <!-- Language selector (reuses submenu styles) -->
+        <ul class="lang-menu">
+            <li class="has-submenu" [class.menu-open]="langMenuOpen">
+                <a href="#" (click)="toggleLangMenu($event)" class="menu-link lang-selector">
+                    {{ languageLabels[currentLang] }}
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </a>
+                <ul *ngIf="langMenuOpen" class="submenu lang-submenu">
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('pt')">Português</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('en')">English</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('es')">Español</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('ja')">日本語</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
         <!-- Menu Icon Mobile -->
         <button 
@@ -138,6 +155,21 @@
                 </li>
             </ul>
             </nav>
+            <!-- Mobile language selector (reuses mobile-submenu styles) -->
+            <div class="mobile-lang">
+                <a href="#" class="menu-link" (click)="toggleMobileLang($event)">
+                    {{ languageLabels[currentLang] }}
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </a>
+                <ul *ngIf="mobileLangOpen" class="mobile-submenu">
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('pt')">Português</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('en')">English</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('es')">Español</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('ja')">日本語</a></li>
+                </ul>
+            </div>
 
             <!-- Login e Instagram Mobile -->
             <div class="mobile-footer">

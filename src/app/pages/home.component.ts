@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,22 +10,22 @@ import { CommonModule } from '@angular/common';
       <div class="content-row">
         <div class="image-content">
           <div class="circle-image crop-right">
-            <img src="/assets/Ativo_1.png" alt="Taiko com diversidade">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Ativo_1.png" alt="Levamos a tradição e cultura">
           </div>
         </div>
         <div class="text-content">
-          <h2>Taiko com diversidade</h2>
+          <h1>Levamos a tradição e cultura</h1>
           <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
         </div>
       </div>
       <div class="content-row reverse">
         <div class="image-content">
           <div class="circle-image crop-left">
-            <img src="/assets/Ativo_2.png" alt="Levamos a tradição e cultura">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Ativo_2.png" alt="Taiko com diversidade">
           </div>
         </div>
         <div class="text-content">
-          <h2>Levamos a tradição e cultura</h2>
+          <h1>Taiko com diversidade</h1>
           <p>Norem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
         </div>
       </div>
@@ -87,69 +87,91 @@ import { CommonModule } from '@angular/common';
     </section>
   `
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSlide = 0;
   featuredEvents = [
     {
       title: 'Apresentação e oficinas de Taiko no Salão do Livro',
       location: 'Jardim externo do Centro Cultural Usiminas - Shopping do Vale do Aço - Ipatinga - MG',
       date: 'Domingo, 14 de Set às 10 às 12h',
-      image: '/assets/taiko1.jpg',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/grupo.jpg',
       link: '#evento1'
     },
     {
       title: 'Apresentação e oficinas de taiko',
       location: 'praça de alimentação ( em frente ao restaurante Massume) - Shopping do Vale do Aço - Ipatinga - MG',
       date: 'Sábado, 4 de Out às 14 às 15h',
-      image: '/assets/taiko1.jpg',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
       link: '#evento2'
     },
     {
       title: 'Mostra de Taiko - Treino aberto e oficinas de taiko',
       location: 'Galpão 1 - Parque Ipanema - Ipatinga - MG',
       date: 'Sábado, 18 de Out às 13 às 17h',
-      image: '/assets/taiko1.jpg',
+      image: 'https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/taiko1.jpg',
       link: '#evento3'
     }
   ];
 
   private carouselInterval: any;
+  private imagesPreloaded = false;
 
   ngOnInit(): void {
     this.startCarouselAutoplay();
-    // Preload de imagens removido para SSR/prerendering mais rápido
   }
 
-  private preloadImages() {
-    // Preload de imagens desabilitado para SSR/prerendering
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.preloadImages();
+    }, 100);
   }
 
   ngOnDestroy(): void {
-    if (this.carouselInterval) {
-      clearInterval(this.carouselInterval);
-    }
+  if (this.carouselInterval) {
+    clearInterval(this.carouselInterval);
+  }
+}
+  // Método para garantir URLs corretas
+  getImageUrl(imageName: string): string {
+    // Para Angular, assets ficam na pasta assets/
+    return `assets/${imageName}`;
   }
 
-  nextSlide() {
+  private preloadImages(): void {
+    if (this.imagesPreloaded) return;
+
+    this.featuredEvents.forEach(event => {
+      const img = new Image();
+      img.src = this.getImageUrl(event.image);
+      
+      // Opcional: log para debug
+      img.onload = () => console.log(`Imagem carregada: ${event.image}`);
+      img.onerror = () => console.error(`Erro ao carregar: ${event.image}`);
+    });
+
+    this.imagesPreloaded = true;
+  }
+
+  nextSlide(): void {
     this.currentSlide = (this.currentSlide + 1) % this.featuredEvents.length;
     this.resetAutoplay();
   }
 
-  prevSlide() {
+  prevSlide(): void {
     this.currentSlide = this.currentSlide === 0 ? this.featuredEvents.length - 1 : this.currentSlide - 1;
     this.resetAutoplay();
   }
 
-  goToSlide(index: number) {
+  goToSlide(index: number): void {
     this.currentSlide = index;
     this.resetAutoplay();
   }
 
-  private startCarouselAutoplay() {
+  private startCarouselAutoplay(): void {
     this.carouselInterval = setInterval(() => this.nextSlide(), 5000);
   }
 
-  private resetAutoplay() {
+  private resetAutoplay(): void {
     if (this.carouselInterval) {
       clearInterval(this.carouselInterval);
       this.startCarouselAutoplay();

@@ -10,10 +10,9 @@ import { RouterModule } from '@angular/router';
   selector: 'app-contato-oficinas',
   template: `
     <div class="solicitacao-container" *ngIf="!enviado">
-      <h1>Solicitação de apresentação e oficinas</h1>
+      <h1>Solicitações de apresentações e oficinas</h1>
       <p>
-        Para solicitar a sua apresentação e retornarmos para você informações de orçamento e disponibilidade,
-        por favor preencha o formulário abaixo:
+        Para solicitar sua apresentação e receber informações sobre orçamento e disponibilidade, preencha o formulário abaixo.
       </p>
 
       <form #solicitacaoForm="ngForm">
