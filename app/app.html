@@ -1,0 +1,216 @@
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+<header class="header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo-container">
+        <img 
+            src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Logo.png" 
+            alt="Kouryuu Daiko" 
+            class="logo"
+        />
+        </div>
+
+        <!-- Menu Desktop -->
+        <nav class="desktop-menu">
+            <ul>
+                <li *ngFor="let item of menuItems; let i = index" 
+                    [class.has-submenu]="item.submenu"
+                    [class.menu-open]="item.isOpen">
+                    
+                    <!-- Item principal com submenu -->
+                    <a *ngIf="item.submenu"
+                    href="#"
+                    (click)="toggleSubmenu(item, $event)"
+                    [class.active]="item.active"
+                    class="menu-link">
+                        {{ item.label }}
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </a>
+                    
+                    <!-- Item simples sem submenu -->
+                    <a *ngIf="!item.submenu"
+                    [routerLink]="item.href"
+                    [class.active]="item.active"
+                    class="menu-link"
+                    (click)="setActiveItem(menuItems.indexOf(item))">
+                        {{ item.label }}
+                    </a>
+
+                    <!-- Submenu -->
+                    <ul *ngIf="item.submenu && item.isOpen" class="submenu">
+                        <li *ngFor="let sub of item.submenu">
+                            <a [routerLink]="sub.href" class="submenu-link" (click)="setActiveItem(i); closeAllSubmenus()">
+                                {{ sub.label }}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Login Desktop -->
+    <div class="desktop-login">
+    <a [routerLink]="'/login'" class="login-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+    </a>
+        <!-- Language selector (reuses submenu styles) -->
+        <ul class="lang-menu">
+            <li class="has-submenu" [class.menu-open]="langMenuOpen">
+                <a href="#" (click)="toggleLangMenu($event)" class="menu-link lang-selector">
+                    {{ languageLabels[currentLang] }}
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </a>
+                <ul *ngIf="langMenuOpen" class="submenu lang-submenu">
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('pt')">Português</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('en')">English</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('es')">Español</a></li>
+                    <li><a href="#" class="submenu-link" (click)="setLanguage('ja')">日本語</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+        <!-- Menu Icon Mobile -->
+        <button 
+        class="menu-icon"
+        [class.open]="isMenuOpen"
+        (click)="toggleMenu()"
+        aria-label="Menu"
+        >
+        <span></span>
+        <span></span>
+        <span></span>
+        </button>
+    </div>
+</header>
+
+        <!-- Mobile Menu Overlay -->
+        <div 
+        class="mobile-overlay"
+        [class.visible]="isMenuOpen"
+        (click)="closeMenu()"
+        ></div>
+
+        <!-- Mobile Menu -->
+        <div 
+        class="mobile-menu"
+        [class.open]="isMenuOpen"
+        >
+        <div class="mobile-menu-content">
+            <!-- Close Button -->
+            <div class="close-btn-container">
+            <button 
+                class="close-btn"
+                (click)="closeMenu()"
+                aria-label="Fechar menu"
+            >
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            </div>
+
+            <!-- Menu Items -->
+            <nav class="mobile-nav">
+            <ul class="mobile-menu-list">
+                <li *ngFor="let item of menuItems; let i = index" 
+                    [class.menu-open]="item.isOpen">
+                
+                <a *ngIf="!item.submenu"
+                    [routerLink]="item.href"
+                    [class.active]="item.active"
+                    class="mobile-menu-link"
+                    (click)="setActiveItem(i)">
+                    {{ item.label }}
+                </a>
+                
+                <a *ngIf="item.submenu"
+                    href="#"
+                    (click)="toggleSubmenu(item, $event)"
+                    [class.active]="item.active"
+                    class="menu-link">
+                        {{ item.label }}
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </a>
+                
+                <ul *ngIf="item.submenu" class="mobile-submenu">
+                    <li *ngFor="let sub of item.submenu">
+                    <a [routerLink]="sub.href"
+                        class="mobile-submenu-link"
+                        (click)="setActiveItem(i); closeMenu()">
+                        {{ sub.label }}
+                    </a>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            </nav>
+            <!-- Mobile language selector (reuses mobile-submenu styles) -->
+            <div class="mobile-lang">
+                <a href="#" class="menu-link" (click)="toggleMobileLang($event)">
+                    {{ languageLabels[currentLang] }}
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </a>
+                <ul *ngIf="mobileLangOpen" class="mobile-submenu">
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('pt')">Português</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('en')">English</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('es')">Español</a></li>
+                    <li><a href="#" class="mobile-submenu-link" (click)="setLanguage('ja')">日本語</a></li>
+                </ul>
+            </div>
+
+            <!-- Login e Instagram Mobile -->
+            <div class="mobile-footer">
+            <a [routerLink]="'/login'" class="mobile-footer-link" (click)="closeMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Login</span>
+            </a>
+            <a 
+                href="https://www.instagram.com/kouryuu.daiko"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mobile-footer-link"
+                (click)="closeMenu()"
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="m16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+                <span>Instagram</span>
+            </a>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+<footer class="footer">
+    <p>2025 Kouryuu Daiko. Todos os direitos reservados.</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/kouryuu.daiko">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/kouryuu.daiko">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/Instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com/kouryuu.daiko">
+            <img src="https://raw.githubusercontent.com/Willvsr/Taiko_site/refs/heads/master/src/assets/YouTube.png" alt="YouTube">
+        </a>
+    </div>
+</footer>
