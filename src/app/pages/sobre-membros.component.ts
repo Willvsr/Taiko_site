@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
       <div class="membro-card">
         <img src="/assets/keiko.jpg" alt="Elizabeth Keiko Takahashi" class="membro-foto">
         <div class="membro-texto">
-          <h3><span>Elizabeth Keiko Takahashi - Líder</span></h3>
+          <h3><span>Elizabete Keiko Takahashi - Líder</span></h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, 
             ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
             per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.</p>
